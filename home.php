@@ -1,3 +1,8 @@
+<?php
+session_start();
+include "config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,10 +42,14 @@
           </div>
         </div>
       </nav>
-            <!-- ISI content -->
         <div class="container mt-3">
         <h3 class="text-center">DAFTAR BUKU</h3>
         <a href="create.php" class="btn btn-primary">Tambah Buku</a>
+        <div class="container mx-auto mt-4">
+            <form class="d-flex" action="cari.php" method="get">
+                <input class="form-control me-2" type="text" placeholder="cari buku" name="cari">
+                <input type="submit" value="Cari" class="btn btn-success">
+    </form>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -51,12 +60,38 @@
                     <th>Kota</th>
                     <th>Penerbit</th>
                     <th>Cover</th>
-                    <th>Sinopsis</th>
                     <th>Stock</th>
+                    <th>Aksi</th>
 
                 </tr>
             </thead>
             <tbody>
+
+            <?php
+
+            $ambil = mysqli_query($conn, "SELECT * FROM buku");
+            while ($data = mysqli_fetch_array($ambil)) {
+                
+            ?>
+            
+            <tr>
+                <td><?= $data['id_buku'] ?></td>
+                <td><?= $data['penulis'] ?></td>
+                <td><?= $data['tahun'] ?></td>
+                <td><?= $data['judul'] ?></td>
+                <td><?= $data['kota'] ?></td>
+                <td><?= $data['penerbit'] ?></td>
+                <td>
+                <img src= "assets/cover/<?= $data['cover'] ?>" class= "img-thumbnail" alt=""
+                    style="width: 50px;">
+                    </td>
+                <td><?= $data['stok'];  ?></td>
+                <td><a href="#"><button class="btn btn-primary">Pinjam</button></a></td>
+            </tr>
+            
+            <?php
+            }
+            ?>
           
             </tbody>
         </table>
@@ -64,12 +99,5 @@
         </div>
     </div>
         
-
-
-
-
-
-   
-
 </body>
 </html>
