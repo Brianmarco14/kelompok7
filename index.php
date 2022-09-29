@@ -15,20 +15,16 @@
     <div class="login-wrapper d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="input-wrapper p-4 w-25 bg-secondary rounded-4 bg-opacity-25">
             <form action="" method="POST">
-                <h2 class="text-center">Login</h2>
+                <h2 class="text-center">Login Siswa</h2>
                 <div class="my-4">
-                    <label for="" class="form-label">Username</label>
+                    <label for="" class="form-label">NIS</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="username">
-                </div>
-                <div class="my-4">
-                    <label for="" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputEmail1" name="password">
                 </div>
                 <div class="text-center">
                     <button type="submit" name="submit" class="btn btn-primary">Login</button>
                 </div>
             </form>
-            <p>Belum punya akun? </p><a href="">Daftar Disini</a>
+            <p>Bukan siswa? </p><a href="#">Login sebagi admin</a>
         </div>
     </div>
 
