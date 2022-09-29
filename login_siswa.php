@@ -59,7 +59,7 @@ if(isset($_POST['login'])){
                     <button type="submit" name="login" class="btn btn-primary">Login</button>
                 </div>
             </form>
-            <p>Bukan siswa? </p><a href="login_admin.php">Login sebagi admin</a>
+            <p>Bukan siswa? </p><a href="login_admin.php">Login sebagai admin</a>
         </div>
     </div>
 
