@@ -31,21 +31,14 @@ include "config.php";
               <b><a class="nav-link active aria-current="page" href="#">Home</a></b>
               </li>
               <li class="nav-item">
-                <b><a class="nav-link" href="#" >Peminjaman</a></b>
-              </li>
-              <li class="nav-item">
-                <b><a class="nav-link" href="#">Pengembalian</a></b>
-              </li>
-              <li class="nav-item">
                 <div class="id=button"></div>
-              <a href="logout.php" class="btn btn-primary text-white" style="font-weight:600; width: 100px;">Log Out</a>
+                <a href="logout.php" class="btn btn-primary text-white" style="font-weight:600; width: 100px;">Log Out</a>
               </li>
           </div>
         </div>
       </nav>
         <div class="container mt-3">
         <h3 class="text-center">DAFTAR BUKU</h3>
-        <a href="create_buku.php" class="btn btn-primary">Tambah Buku</a>
         <div class="container mx-auto mt-4">
             <form class="d-flex" action="cari.php" method="get">
                 <input class="form-control me-2" type="text" placeholder="cari buku" name="cari">
@@ -62,9 +55,6 @@ include "config.php";
                     <th>Kota</th>
                     <th>Penerbit</th>
                     <th>Stock</th>
-                    <th>Pinjam Buku</th>
-                    <th>Aksi</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -88,9 +78,6 @@ include "config.php";
                 <td><?= $data['kota'] ?></td>
                 <td><?= $data['penerbit'] ?></td>
                 <td><?= $data['stok'];  ?></td>
-                <td><a href="#" class="btn btn-primary">Pinjam</a></td>
-                <td><a href="edit.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-warning">Edit</a>
-                <td><a href="delete.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-danger">Hapus</a></td>
             </tr>
             
             <?php
