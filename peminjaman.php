@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+session_start();
 
 ?>
 
@@ -16,43 +17,49 @@ include 'config.php';
 
 <div class="container">
 		<h1 class="text-center">Peminjaman</h1>
+
 		<form action="" method="post" enctype="multipart/form-data">
 			<table class="table table-striped">
 				<tbody>
-                    <tr>
-						<td>Cover</td>
-						<td><input type="text" class="form-control" name="cover" required></input></td>
-					</tr>
-					<tr>
-						<td>Kode Buku</td>
-						<td><input type="text" class="form-control" name="kode_buku" placeholder="Masukkan Kode Buku" required></input></td>
-					</tr>
-                    <div>
-						<td>Judul</td>
-						<td><select class="" name="judul"></td>
-                    <?php
-                    $sql = mysqli_query($conn, "SELECT * FROM buku");
-                    while ($data = mysqli_fetch_array($sql)){
-                    ?>
-                    <option value="<?= $data['id_buku']?>"><?= $data['judul']?></option>;
-                    <?php if ($data['id_buku'] == $data['judul']){
-                        echo "selected"; } 
-                        ?>
-                        <?php
-                    } ?>
-            </select>
-                </div>
-					<tr>
+				<tr>
 						<td>NIS</td>
-						<td><input type="text" class="form-control" name="NIS" placeholder="Masukkan NIS Siswa" required></input></td>
+						<td><input type="text" class="form-control" name="nis" placeholder="Masukkan NIS" required></input></td>
 					</tr>
 					<tr>
 						<td>Petugas</td>
-						<td><input type="text" class="form-control" name="petugas" placeholder="Masukkan Nama Petugas" required></input></td>
+						<td><input type="text" class="form-control" name="nip" value="<?= $_SESSION['nip'] ?>"></input></td>
+					</tr>
+				<?php
+					$id_buku = $_GET['id_buku'];
+					$ambil = mysqli_query($conn, "SELECT * FROM buku WHERE id_buku = $id_buku");
+					while($data = mysqli_fetch_assoc($ambil)) {
+				?>
+                    <tr>
+						<td>Cover</td>
+						<td><img src="assets/cover/<?php echo $data['cover'] ?>" class= "img-thumbnail" alt="" style="width: 200px;"></td>
 					</tr>
 					<tr>
+						<td>Kode Buku</td>
+						<td><input type="text" class="form-control" name="kode_buku" value="<?php echo $data['id_buku'] ?>" disabled></input></td>
+					</tr>
+					<tr>
+					<td>Judul</td>
+					<td><input type="text" class="form-control" name="kode_buku" value="<?php echo $data['judul'] ?>" disabled></input></td>
+					</td>
+					</tr>
 						<td>Total</td>
-						<td><input type="number" class="form-control" name="total" placeholder="Masukkan Total Buku" required></input></td>
+						<td><input type="number" class="form-control" name="stok" value="<?php echo $data['stok'] ?>" disabled></input></td>
+					</tr>
+					<?php
+						}
+					?>
+					<tr>
+						<td>Tanggal Peminjaman</td>
+						<td><input type="date" class="form-control" name="pinjam"></input></td>
+					</tr>
+					<tr>
+					<td>Tanggal Pengembalian</td>
+						<td><input type="date" class="form-control" name="kembali"></input></td>
 					</tr>
 				</tbody>
 			</table>
@@ -73,17 +80,16 @@ include 'config.php';
 
 
 if (isset($_POST['submit'])) {
-	$kode_buku = $_POST['kode_buku'];
-	$judul = $_POST['judul'];
-	$NIS = $_POST['NIS'];
-	$petugas = $_POST['petugas'];
-    $total = $_POST['total'];
+	$nis = $_POST['nis'];
+	$nip = $_POST['nip'];
+	$pinjam = $_POST['pinjam'];
+	$kembali = $_POST['kembali'];
 
-	$query_insert = mysqli_query($conn, "INSERT INTO buku(penulis, tahun, judul, kota, penerbit, cover, stok)
-	VALUES ('$penulis','$tahun', '$judul', '$kota', '$penerbit', '$file', '$stok')");
 
-	echo "<script>alert('Data telah disimpan');
-	document.location='home.php'</script>";
+	$query_insert = mysqli_query($conn, "INSERT INTO peminjaman(id_siswa, id_petugas, tanggal_peminjaman, tanggal_pengembalian)
+	VALUES ('$nis','$nip', '$pinjam', '$kembali')");
+
+	echo "<script>alert('Data telah disimpan');window.location.href='home.php'</script>";
 }
 
 ?>

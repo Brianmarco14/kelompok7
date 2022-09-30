@@ -1,6 +1,11 @@
 <?php
-session_start();
+
 include "config.php";
+session_start();
+if(!$_SESSION['nama']){
+  header("Location: login_admin.php");
+}
+
 ?>
 
 <!-- dinda -->
@@ -28,7 +33,7 @@ include "config.php";
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-              <b><a class="nav-link active aria-current="page" href="#">Home</a></b>
+              <b><a class="nav-link" active aria-current="page" href="#">Home</a></b>
               </li>
               <li class="nav-item">
                 <b><a class="nav-link" href="#" >Peminjaman</a></b>
@@ -88,7 +93,7 @@ include "config.php";
                 <td><?= $data['kota'] ?></td>
                 <td><?= $data['penerbit'] ?></td>
                 <td><?= $data['stok'];  ?></td>
-                <td><a href="#" class="btn btn-primary">Pinjam</a></td>
+                <td><a href="peminjaman.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-primary">Pinjam</a></td>
                 <td><a href="edit.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-warning">Edit</a>
                 <td><a href="delete.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-danger">Hapus</a></td>
             </tr>

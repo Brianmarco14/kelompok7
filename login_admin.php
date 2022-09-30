@@ -11,6 +11,12 @@ if(isset($_POST['submit'])){
     $query =mysqli_query($conn, "SELECT * FROM petugas WHERE nama='$username' AND password='$password'");
     $data = mysqli_fetch_assoc($query);
 
+    $valid =mysqli_num_rows($query);
+    if($query==1){
+    $_SESSION['nip'] = $data['nip'];
+    $_SESSION['nama'] = $data['nama'];
+    header("location:home.php");
+    }
     if($data){
         echo "<script>window.location.href='home.php'</script>";
     } else{
