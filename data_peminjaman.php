@@ -58,8 +58,11 @@ include "config.php";
             <thead>
                 <tr>
                     <th>ID Peminjaman</th>
-                    <th>ID Siswa</th>
-                    <th>ID Petugas</th>
+                    <th>Nama Siswa</th>
+                    <th>Nama Petugas</th>
+                    <th>Judul Buku</th>
+                    <th>cover</th>
+                    <th>Jumlah</th>
                     <th>Tanggal Peminjaman</th>
                     <th>Tanggal Pengembalian</th>
 
@@ -69,7 +72,7 @@ include "config.php";
 
             <?php
 
-            $ambil = mysqli_query($conn, "SELECT * FROM peminjaman");
+            $ambil = mysqli_query($conn, "SELECT * FROM detail_peminjam JOIN peminjaman ON id_peminjam = peminjaman.id_peminjaman LEFT JOIN buku ON detail_peminjam.id_buku = buku.id_buku JOIN siswa ON peminjaman.id_siswa = siswa.nis JOIN petugas ON peminjaman.id_petugas=petugas.nip;");
             while ($data = mysqli_fetch_array($ambil)) {
                 
             ?>
@@ -77,7 +80,13 @@ include "config.php";
             <tr>
                 <td><?= $data['id_peminjaman'] ?></td>
                 <td><?= $data['id_siswa'] ?></td>
-                <td><?= $data['id_petugas'] ?></td>
+                <td><?= $data['nama'] ?></td>
+                <td><?= $data['judul'] ?></td>
+                <td>
+                <img src= "assets/cover/<?= $data['cover'] ?>" class= "img-thumbnail" alt=""
+                    style="width: 100px;">
+                </td>
+                <td><?= $data['kuantitas'] ?></td>
                 <td><?= $data['tanggal_peminjaman'] ?></td>
                 <td><?= $data['tanggal_pengembalian'] ?></td>
             </tr>

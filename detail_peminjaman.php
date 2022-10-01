@@ -17,14 +17,14 @@ session_start();
 
 <div class="container card p-3 mt-2">
 		<h1 class="text-center">Peminjaman</h1>
-        
+
 
 		<form action="" method="post" enctype="multipart/form-data">
 			<table class="table">
 				<tbody>
 				<?php
-					$id_buku = $_GET['id_buku'];
-					$ambil = mysqli_query($conn, "SELECT * FROM buku WHERE id_buku = $id_buku");
+					$id_peminjaman = $_GET['id_peminjaman'];
+					$ambil = mysqli_query($conn, "SELECT * FROM peminjaman WHERE id_peminjaman = $id_peminjaman");
 					while($data = mysqli_fetch_assoc($ambil)) {
 				?>
                     <tr>

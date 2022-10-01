@@ -48,7 +48,7 @@ session_start();
 					</tr>
 					</tr>
 						<td>Total</td>
-						<td><input type="number" class="form-control" name="total" ></input></td>
+						<td><input type="number" class="form-control" name="total" placeholder="Masukkan jumlah buku" ></input></td>
 					</tr>
 					<?php
 						}
@@ -65,7 +65,7 @@ session_start();
 			</table>
 			<div class="text-end">
 			<a href="home.php" type="button" class="btn btn-danger"> Kembali </a>
-			<button type="submit" name="submit" class="btn btn-success">Submit</button>
+			<a href="detail_peminjaman.php?id_peminjaman=<?= $data['id_peminjaman'] ?>" name="submit" class="btn btn-success">Submit</a>
 		</div>
 		</form>
 	</div>
