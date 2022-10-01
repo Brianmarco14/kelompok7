@@ -33,22 +33,26 @@ if(!$_SESSION['nama']){
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-              <b><a class="nav-link" active aria-current="page" href="#">Home</a></b>
+              <b><a class="nav-link active" active aria-current="page" href="#">Home</a></b>
               </li>
               <li class="nav-item">
-                <b><a class="nav-link" href="#" >Peminjaman</a></b>
+                <b><a class="nav-link" href="data_siswa.php" >Siswa</a></b>
               </li>
               <li class="nav-item">
-                <b><a class="nav-link" href="#">Pengembalian</a></b>
+                <b><a class="nav-link" href="data_peminjaman.php" >Peminjaman</a></b>
+              </li>
+              <li class="nav-item">
+                <b><a class="nav-link" href="data_pengembalian.php">Pengembalian</a></b>
               </li>
               <li class="nav-item">
                 <div class="id=button"></div>
               <a href="logout.php" class="btn btn-primary text-white" style="font-weight:600; width: 100px;">Log Out</a>
               </li>
+            </ul>
           </div>
         </div>
       </nav>
-        <div class="container mt-3">
+        <div class="container mt-3 card p-5 shadow ">
         <h3 class="text-center">DAFTAR BUKU</h3>
         <a href="create_buku.php" class="btn btn-primary">Tambah Buku</a>
         <div class="container mx-auto mt-4">

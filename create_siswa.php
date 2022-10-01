@@ -59,7 +59,7 @@ include 'config.php';
         </div>
          
          <div class="text-end">
-			<a href="home.php" type="button" class="btn btn-danger"> Kembali </a>
+			<a href="data_siswa.php" type="button" class="btn btn-danger"> Kembali </a>
 			<button type="submit" name="submit" class="btn btn-success">Submit</button>
 		</div>
 

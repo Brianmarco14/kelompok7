@@ -48,7 +48,7 @@ if(isset($_POST['login'])){
         </div>
       </nav>
     <div class="login-wrapper d-flex justify-content-center align-items-center" style="height: 100vh;">
-        <div class="input-wrapper p-4 w-25 bg-secondary rounded-4 bg-opacity-25">
+        <div class="input-wrapper p-4 w-25 bg-secondary rounded-4 bg-opacity-25 shadow">
             <form action="" method="POST">
                 <h2 class="text-center">Login Siswa</h2>
                 <div class="my-4">

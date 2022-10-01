@@ -17,6 +17,7 @@ session_start();
 
 <div class="container card p-3 mt-2">
 		<h1 class="text-center">Peminjaman</h1>
+        
 
 		<form action="" method="post" enctype="multipart/form-data">
 			<table class="table">
@@ -75,21 +76,3 @@ session_start();
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-<?php
-
-
-if (isset($_POST['submit'])) {
-	$nis = $_POST['nis'];
-	$nip = $_POST['nip'];
-	$pinjam = $_POST['pinjam'];
-	$kembali = $_POST['kembali'];
-
-
-	$query_insert = mysqli_query($conn, "INSERT INTO peminjaman(id_siswa, id_petugas, tanggal_peminjaman, tanggal_pengembalian)
-	VALUES ('$nis','$nip', '$pinjam', '$kembali')");
-
-	echo "<script>alert('Data telah disimpan');window.location.href='detail_peminjaman.php'</script>";
-}
-
-?>

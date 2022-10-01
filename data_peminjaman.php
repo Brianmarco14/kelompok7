@@ -31,10 +31,10 @@ include "config.php";
               <b><a class="nav-link" active aria-current="page" href="home.php">Home</a></b>
               </li>
               <li class="nav-item">
-                <b><a class="nav-link active" href="data_siswa.php" >Siswa</a></b>
+                <b><a class="nav-link" href="data_siswa.php" >Siswa</a></b>
               </li>
               <li class="nav-item">
-                <b><a class="nav-link" href="data_peminjaman.php" >Peminjaman</a></b>
+                <b><a class="nav-link active" href="data_peminjaman.php" >Peminjaman</a></b>
               </li>
               <li class="nav-item">
                 <b><a class="nav-link" href="data_pengembalian.php">Pengembalian</a></b>
@@ -48,22 +48,20 @@ include "config.php";
         </div>
       </nav>
         <div class="container mt-3">
-        <h3 class="text-center">DATA SISWA</h3>
-        <a href="create_siswa.php" class="btn btn-primary">Tambah Siswa</a>
+        <h3 class="text-center">DATA PEMINJAMAN</h3>
         <div class="container mx-auto mt-4">
             <form class="d-flex" action="cari_siswa.php" method="get">
-                <input class="form-control me-2" type="text" placeholder="cari siswa" name="cari">
+                <input class="form-control me-2" type="text" placeholder="cari data" name="cari">
                 <input type="submit" value="Cari" class="btn btn-success">
     </form>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>NIS</th>
-                    <th>Nama</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Alamat</th>
-                    <th>Kelas</th>
-                    <th>Aksi</th>
+                    <th>ID Peminjaman</th>
+                    <th>ID Siswa</th>
+                    <th>ID Petugas</th>
+                    <th>Tanggal Peminjaman</th>
+                    <th>Tanggal Pengembalian</th>
 
                 </tr>
             </thead>
@@ -71,19 +69,17 @@ include "config.php";
 
             <?php
 
-            $ambil = mysqli_query($conn, "SELECT * FROM siswa JOIN kelas ON siswa.id_kelas=kelas.id_kelas");
+            $ambil = mysqli_query($conn, "SELECT * FROM peminjaman");
             while ($data = mysqli_fetch_array($ambil)) {
                 
             ?>
             
             <tr>
-                <td><?= $data['nis'] ?></td>
-                <td><?= $data['nama'] ?></td>
-                <td><?= $data['jenis_kelamin'] ?></td>
-                <td><?= $data['alamat'] ?></td>
-                <td><?= $data['nama_kelas'] ?></td>
-                <td><a href="edit_siswa.php?nis=<?= $data['nis'] ?>" class="btn btn-warning">Edit</a>
-                <a href="delete_siswa.php?nis=<?= $data['nis'] ?>" class="btn btn-danger">Hapus</a></td>
+                <td><?= $data['id_peminjaman'] ?></td>
+                <td><?= $data['id_siswa'] ?></td>
+                <td><?= $data['id_petugas'] ?></td>
+                <td><?= $data['tanggal_peminjaman'] ?></td>
+                <td><?= $data['tanggal_pengembalian'] ?></td>
             </tr>
             
             <?php
