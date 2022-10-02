@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2022 at 08:27 AM
+-- Generation Time: Oct 02, 2022 at 05:06 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -46,7 +46,8 @@ CREATE TABLE `buku` (
 INSERT INTO `buku` (`id_buku`, `penulis`, `tahun`, `judul`, `kota`, `penerbit`, `cover`, `sinopsi`, `stok`) VALUES
 (1, 'Sarwidji Widoatmodjo', 2015, 'Pengetahuan pasar modal : untuk konteks Indonesia', 'Jakarta', 'Elex Media Komputindo', 'buku1.jpg', 'Pengetahuan pasar modal menjadi topik yang harus dikuasai mahasiswa Indonesia dan para pelaku bisnis. Paling tidak ada dua balasan yang bisa mendasar statement tersebut. Pertama, kalangan kampus akhir-akhir ini sedang menggalakkan entrepreneurship. Namun, sering kali kewirausahaan ini didapakan pada permasalahan permodalan. Hal yang selalu dijumpai, lulusan perguruan tinggi yang sudah mengusai ilmu entrepreneurship sekalipun tidak berhasil melahirkan usaha sendiri, akibat tidak tersedianya modal. Padahal, pasar modal bisa menyediakan modal yang diperlukan tersebut. Alasan kedua, tiga dekade terakhir dunia sering dilanda krisis ekonomi yang bersumber dari pasar modal. Pasar modal yang niatnya dibentuk untuk menyediakan modal bagi para pengusaha dan menyediakan alternatif penghasilan bagi para pemilik modal, telah menjadi ajang spekulasi, yang selalu berakhir dengan krisis ekonomi.', 2),
 (2, 'Andreas Zu', 2016, 'Kitab jomblo', 'Yogyakarta', 'Pohon Cahaya', 'buku2.jpg', 'Kesan pertama setelah buku ini ada di tangan dan saya keluarkan dari plastiknya, covernya ganti. Tampak lebih muda, fresh dan simple. Ada gambar ayam di cover yang sepertinya mengambil ide dari cerita yang ada di dalamnya. Begitu buku saya buka, sial lem nya lepas. Covernya hampir copot, jadi terpaksa bacanya pelan-pelan kayak lagi ngelus tangan mantan.', 2),
-(3, 'Sjarif Amin', 2017, 'Bangkarak jurnalistik', 'Bandung', 'Dunia Pustaka Jaya', 'buku3.jpg', 'Membaca tulisan Syarif Amin dalam buku ini, membangunkan kembali rasa penasaran mengenai \"Bayangan Dirinya\" Orang Sunda jaman sekarang. Mohamad Koerdi atau Sjarif Amin adalah salah satu tokoh pers nasional yang lahir di Ciamis pada 10 September 1907. Ia mulai aktif di dunia jurnalistik pada tahun 1929 sebagai wartawan surat kabar berbahasa Sunda, Sipatahoenan. Tahun 1930-an awal, selain aktif di Sipatahoenan, ia juga menjadi penanggung jawab redaktur mingguan Bidjaksana.', 2);
+(3, 'Sjarif Amin', 2017, 'Bangkarak jurnalistik', 'Bandung', 'Dunia Pustaka Jaya', 'buku3.jpg', 'Membaca tulisan Syarif Amin dalam buku ini, membangunkan kembali rasa penasaran mengenai \"Bayangan Dirinya\" Orang Sunda jaman sekarang. Mohamad Koerdi atau Sjarif Amin adalah salah satu tokoh pers nasional yang lahir di Ciamis pada 10 September 1907. Ia mulai aktif di dunia jurnalistik pada tahun 1929 sebagai wartawan surat kabar berbahasa Sunda, Sipatahoenan. Tahun 1930-an awal, selain aktif di Sipatahoenan, ia juga menjadi penanggung jawab redaktur mingguan Bidjaksana.', 2),
+(6, 'qwwqw', 2022, 'qwqwq', 'qwqw', 'qwqwq', '2nd.png', '', 10);
 
 -- --------------------------------------------------------
 
@@ -122,6 +123,7 @@ CREATE TABLE `peminjaman` (
   `id_peminjaman` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
   `id_petugas` int(11) NOT NULL,
+  `id_buku` int(11) NOT NULL,
   `tanggal_peminjaman` date NOT NULL,
   `tanggal_pengembalian` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -130,10 +132,16 @@ CREATE TABLE `peminjaman` (
 -- Dumping data for table `peminjaman`
 --
 
-INSERT INTO `peminjaman` (`id_peminjaman`, `id_siswa`, `id_petugas`, `tanggal_peminjaman`, `tanggal_pengembalian`) VALUES
-(1, 1, 3, '2022-03-01', '2022-03-15'),
-(2, 3, 2, '2022-05-01', '2022-05-15'),
-(3, 2, 1, '2022-07-01', '2022-09-15');
+INSERT INTO `peminjaman` (`id_peminjaman`, `id_siswa`, `id_petugas`, `id_buku`, `tanggal_peminjaman`, `tanggal_pengembalian`) VALUES
+(1, 1, 3, 2, '2022-03-01', '2022-03-15'),
+(2, 3, 2, 1, '2022-05-01', '2022-05-15'),
+(3, 2, 1, 3, '2022-07-01', '2022-09-15'),
+(14, 1, 3, 6, '1111-11-11', '1112-11-11'),
+(19, 2, 1, 6, '6666-06-06', '6667-06-06'),
+(20, 1, 1, 6, '4444-04-04', '4445-04-04'),
+(21, 3, 1, 6, '8888-08-08', '8889-08-08'),
+(31, 1, 3, 3, '5555-05-05', '5555-05-05'),
+(32, 2, 3, 2, '1111-11-11', '1111-11-11');
 
 -- --------------------------------------------------------
 
@@ -240,7 +248,8 @@ ALTER TABLE `kelas`
 ALTER TABLE `peminjaman`
   ADD PRIMARY KEY (`id_peminjaman`),
   ADD KEY `id_petugas` (`id_petugas`),
-  ADD KEY `id_siswa` (`id_siswa`);
+  ADD KEY `id_siswa` (`id_siswa`),
+  ADD KEY `id_buku` (`id_buku`);
 
 --
 -- Indexes for table `pengembalian`
@@ -270,7 +279,7 @@ ALTER TABLE `siswa`
 -- AUTO_INCREMENT for table `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `detail_peminjam`
@@ -294,7 +303,7 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `pengembalian`
@@ -336,7 +345,8 @@ ALTER TABLE `detail_pengembalian`
 --
 ALTER TABLE `peminjaman`
   ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`nip`),
-  ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`nis`);
+  ADD CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`nis`),
+  ADD CONSTRAINT `peminjaman_ibfk_3` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`);
 
 --
 -- Constraints for table `pengembalian`
