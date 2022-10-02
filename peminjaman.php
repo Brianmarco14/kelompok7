@@ -21,7 +21,7 @@ session_start();
 		<form action="" method="post" enctype="multipart/form-data">
 				<?php
 					$id_buku = $_GET['id_buku'];
-					$ambil = mysqli_query($conn, "SELECT * FROM buku JOIN detail_peminjam ON buku.id_buku=detail_peminjam.id_buku RIGHT JOIN peminjaman ON detail_peminjam.id_peminjam=peminjaman.id_peminjaman WHERE buku.id_buku = '$id_buku';");
+					$ambil = mysqli_query($conn, "SELECT * FROM buku JOIN  peminjaman ON buku.id_buku=peminjaman.id_buku JOIN siswa ON peminjaman.id_siswa=siswa.nis WHERE peminjaman.id_buku = '$id_buku';");
 					while($data = mysqli_fetch_assoc($ambil)) {
 				?>
 				<div class="mb-3">
@@ -30,11 +30,11 @@ session_start();
             	</div>
 				<div class="mb-3">
 					<label for="" class="form-label">Kode Buku</label>
-					<input type="text" class="form-control" name="kode_buku" value="<?php echo $data['id_buku'] ?>" disabled></input>            	
+					<input type="text" class="form-control" name="id_buku" value="<?php echo $data['id_buku'] ?>"></input>            	
 				</div>
 				<div class="mb-3">
 					<label for="" class="form-label">Judul</label>
-					<input type="text" class="form-control" name="kode_buku" value="<?php echo $data['judul'] ?>" disabled></input>				
+					<input type="text" class="form-control" name="judul" value="<?php echo $data['judul'] ?>"></input>				
 				</div>
 				<div class="mb-3">
 					<label for="" class="form-label">NIS</label>
@@ -77,13 +77,13 @@ session_start();
 
 if (isset($_POST['submit'])) {
 	$nis = $_POST['nis'];
-	$nip = $_POST['nip'];
+	$nip = $_POST['nip'];	
+	$buku = $_POST['id_buku'];
 	$pinjam = $_POST['pinjam'];
 	$kembali = $_POST['kembali'];
 
 
-	$query_insert = mysqli_query($conn, "INSERT INTO peminjaman(id_siswa, id_petugas, tanggal_peminjaman, tanggal_pengembalian)
-	VALUES ('$nis','$nip', '$pinjam', '$kembali')");
+	$query_insert = mysqli_query($conn, "INSERT INTO peminjaman(id_siswa, id_petugas, id_buku,tanggal_peminjaman, tanggal_pengembalian) VALUES ('$nis','$nip','$buku', '$pinjam', '$kembali')");
 
 	echo "<script>alert('Data telah disimpan');window.location.href='detail_peminjaman.php'</script>";
 }

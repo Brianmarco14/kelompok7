@@ -56,10 +56,10 @@ if(!$_SESSION['nama']){
         <h3 class="text-center">DAFTAR BUKU</h3>
         <a href="create_buku.php" class="btn btn-primary">Tambah Buku</a>
         <div class="container mx-auto mt-4">
-            <form class="d-flex" action="cari.php" method="get">
-                <input class="form-control me-2" type="text" placeholder="cari buku" name="cari">
-                <input type="submit" value="Cari" class="btn btn-success">
-    </form>
+          <form class="d-flex" action="cari_buku.php" method="get">
+              <input class="form-control me-2" type="text" placeholder="cari buku" name="cari">
+              <input type="submit" value="Cari" class="btn btn-success">
+          </form>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -98,7 +98,7 @@ if(!$_SESSION['nama']){
                 <td><?= $data['penerbit'] ?></td>
                 <td><?= $data['stok'];  ?></td>
                 <td><a href="peminjaman.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-primary">Pinjam</a></td>
-                <td><a href="edit.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-warning">Edit</a>
+                <td><a href="edit_buku.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-warning">Edit</a>
                 <td><a href="delete.php?id_buku=<?= $data['id_buku'] ?>" class="btn btn-danger">Hapus</a></td>
             </tr>
             
