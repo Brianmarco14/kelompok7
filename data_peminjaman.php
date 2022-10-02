@@ -72,7 +72,7 @@ include "config.php";
 
             <?php
 
-            $ambil = mysqli_query($conn, "SELECT * FROM detail_peminjam JOIN peminjaman ON id_peminjam = peminjaman.id_peminjaman LEFT JOIN buku ON detail_peminjam.id_buku = buku.id_buku JOIN siswa ON peminjaman.id_siswa = siswa.nis JOIN petugas ON peminjaman.id_petugas=petugas.nip;");
+            $ambil = mysqli_query($conn, "SELECT * FROM detail_peminjam RIGHT JOIN peminjaman ON id_peminjam = peminjaman.id_peminjaman LEFT JOIN buku ON detail_peminjam.id_buku = buku.id_buku JOIN siswa ON peminjaman.id_siswa = siswa.nis JOIN petugas ON peminjaman.id_petugas=petugas.nip;");
             while ($data = mysqli_fetch_array($ambil)) {
                 
             ?>

@@ -19,53 +19,49 @@ session_start();
 		<h1 class="text-center">Peminjaman</h1>
 
 		<form action="" method="post" enctype="multipart/form-data">
-			<table class="table">
-				<tbody>
 				<?php
 					$id_buku = $_GET['id_buku'];
-					$ambil = mysqli_query($conn, "SELECT * FROM buku WHERE id_buku = $id_buku");
+					$ambil = mysqli_query($conn, "SELECT * FROM buku JOIN detail_peminjam ON buku.id_buku=detail_peminjam.id_buku RIGHT JOIN peminjaman ON detail_peminjam.id_peminjam=peminjaman.id_peminjaman WHERE buku.id_buku = '$id_buku';");
 					while($data = mysqli_fetch_assoc($ambil)) {
 				?>
-                    <tr>
-						<td>Cover</td>
-						<td><img src="assets/cover/<?php echo $data['cover'] ?>" class= "img-thumbnail" alt="" style="width: 100px;"></td>
-					</tr>
-					<tr>
-						<td>Kode Buku</td>
-						<td><input type="text" class="form-control" name="kode_buku" value="<?php echo $data['id_buku'] ?>" disabled></input></td>
-					</tr>
-					<tr>
-					<td>Judul</td>
-					<td><input type="text" class="form-control" name="kode_buku" value="<?php echo $data['judul'] ?>" disabled></input></td>
-					</td>
-					<tr>
-						<td>NIS</td>
-						<td><input type="text" class="form-control" name="nis" placeholder="Masukkan NIS" required></input></td>
-					</tr>
-					<tr>
-						<td>Petugas</td>
-						<td><input type="text" class="form-control" name="nip" value="<?= $_SESSION['nip'] ?>"></input></td>
-					</tr>
-					</tr>
-						<td>Total</td>
-						<td><input type="number" class="form-control" name="total" placeholder="Masukkan jumlah buku" ></input></td>
-					</tr>
+				<div class="mb-3">
+					<label for="" class="form-label">Cover</label>
+					<img src="assets/cover/<?php echo $data['cover'] ?>" class= "img-thumbnail" alt="" style="width: 100px;">
+            	</div>
+				<div class="mb-3">
+					<label for="" class="form-label">Kode Buku</label>
+					<input type="text" class="form-control" name="kode_buku" value="<?php echo $data['id_buku'] ?>" disabled></input>            	
+				</div>
+				<div class="mb-3">
+					<label for="" class="form-label">Judul</label>
+					<input type="text" class="form-control" name="kode_buku" value="<?php echo $data['judul'] ?>" disabled></input>				
+				</div>
+				<div class="mb-3">
+					<label for="" class="form-label">NIS</label>
+					<input type="text" class="form-control" name="nis" placeholder="Masukkan NIS" required></input>				
+				</div>
+				<div class="mb-3">
+					<label for="" class="form-label">Petugas</label>
+					<input type="text" class="form-control" name="nip" value="<?= $_SESSION['nip'] ?>"></input>
+				</div>
+				<div class="mb-3">
+					<label for="" class="form-label">Total</label>
+					<input type="number" class="form-control" name="total" ></input>				
+				</div>
 					<?php
 						}
 					?>
-					<tr>
-						<td>Tanggal Peminjaman</td>
-						<td><input type="date" class="form-control" name="pinjam"></input></td>
-					</tr>
-					<tr>
-					<td>Tanggal Pengembalian</td>
-						<td><input type="date" class="form-control" name="kembali"></input></td>
-					</tr>
-				</tbody>
-			</table>
+				<div class="mb-3">
+					<label for="" class="form-label">Tanggal Peminjaman</label>
+					<input type="date" class="form-control" value="" name="pinjam"></input>				
+				</div>
+				<div class="mb-3">
+					<label for="" class="form-label">Tanggal Pengembalian</label>
+					<input type="date" class="form-control" name="kembali"></input>				
+				</div>
 			<div class="text-end">
 			<a href="home.php" type="button" class="btn btn-danger"> Kembali </a>
-			<a href="detail_peminjaman.php?id_peminjaman=<?= $data['id_peminjaman'] ?>" name="submit" class="btn btn-success">Submit</a>
+			<button type="submit" name="submit" class="btn btn-success">Submit</button>
 		</div>
 		</form>
 	</div>
