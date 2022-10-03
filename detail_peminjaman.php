@@ -20,7 +20,7 @@ session_start();
 		
 		<form action="" method="post" enctype="multipart/form-data">
 				<?php
-					$ambil = mysqli_query($conn, "SELECT peminjaman.id_peminjaman,detail_peminjam.kuantitas,buku.id_buku,buku.judul,buku.cover, buku.judul, peminjaman.tanggal_peminjaman,peminjaman.tanggal_pengembalian, siswa.nama, siswa.nis, kelas.nama_kelas FROM peminjaman LEFT JOIN detail_peminjam ON peminjaman.id_peminjaman=detail_peminjam.id_peminjam JOIN buku ON peminjaman.id_buku=buku.id_buku JOIN siswa ON peminjaman.id_siswa=siswa.nis RIGHT JOIN kelas ON siswa.id_kelas=kelas.id_kelas  ORDER BY peminjaman.id_peminjaman DESC LIMIT 1;");
+					$ambil = mysqli_query($conn, "SELECT peminjaman.id_peminjaman,detail_peminjam.kuantitas,buku.id_buku,buku.judul,buku.cover, buku.judul, peminjaman.tanggal_peminjaman,peminjaman.tanggal_pengembalian, siswa.nama_siswa, siswa.nis, kelas.nama_kelas FROM peminjaman LEFT JOIN detail_peminjam ON peminjaman.id_peminjaman=detail_peminjam.id_peminjam JOIN buku ON peminjaman.id_buku=buku.id_buku JOIN siswa ON peminjaman.id_siswa=siswa.nis RIGHT JOIN kelas ON siswa.id_kelas=kelas.id_kelas  ORDER BY peminjaman.id_peminjaman DESC LIMIT 1;");
 					while($data = mysqli_fetch_assoc($ambil)) {
 				?>
 				<div class="mb-3">
@@ -33,7 +33,7 @@ session_start();
 				</div>
 				<div class="mb-3">
 					<label for="" class="form-label">Nama Siswa</label>
-					<input type="text" class="form-control" name="nama" value="<?php echo $data['nama'] ?>"></input>            	
+					<input type="text" class="form-control" name="nama" value="<?php echo $data['nama_siswa'] ?>"></input>            	
 				</div>
 				<div class="mb-3">
 					<label for="" class="form-label">Kelas</label>

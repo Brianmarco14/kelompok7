@@ -29,7 +29,7 @@ while($data = mysqli_fetch_array($ambil)){
           </div>
           <div class="mb-3">
             <label for="nama" class="form-label">Nama</label>
-            <input type="text" name="nama" class="form-control" id="nama" value="<?= $data['nama'] ?>">
+            <input type="text" name="nama" class="form-control" id="nama" value="<?= $data['nama_siswa'] ?>">
          </div>
          <div class="mb-3">
          <label for="jenis_kelamin">Jenis Kelamin</label>
@@ -86,7 +86,7 @@ if (isset($_POST['submit'])) {
 	$alamat = $_POST['alamat'];
 	$kelas = $_POST['nama_kelas'];
 
-	$query = mysqli_query($conn, "UPDATE siswa SET nis='$nis', nama='$nama', jenis_kelamin='$jenis_kelamin', alamat='$alamat', id_kelas='$kelas' WHERE nis='$id'");
+	$query = mysqli_query($conn, "UPDATE siswa SET nis='$nis', nama_siswa='$nama', jenis_kelamin='$jenis_kelamin', alamat='$alamat', id_kelas='$kelas' WHERE nis='$id'");
 
 	echo "<script>alert('Data telah diupdate');
 	document.location='data_siswa.php'</script>";

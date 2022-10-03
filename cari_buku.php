@@ -15,7 +15,8 @@ include 'config.php';
 </head>
 <body>
 
-
+<div class="container mx-auto mt-4">
+<table class="table table-striped table-hover">
 <?php
 if(isset($_GET['cari'])){
 	$cari = $_GET['cari'];
@@ -23,9 +24,6 @@ if(isset($_GET['cari'])){
 }
 ?>
 <br>
-
-<table class="table table-striped table-hover">
-<div class="container mx-auto mt-4">
             <thead>
                 <tr>
                     <th>ID</th>

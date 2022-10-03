@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Okt 2022 pada 14.02
+-- Waktu pembuatan: 03 Okt 2022 pada 18.35
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -45,7 +45,7 @@ CREATE TABLE `buku` (
 
 INSERT INTO `buku` (`id_buku`, `penulis`, `tahun`, `judul`, `kota`, `penerbit`, `cover`, `sinopsi`, `stok`) VALUES
 (1, 'Sarwidji Widoatmodjo', 2015, 'Pengetahuan pasar modal : untuk konteks Indonesia', 'Jakarta', 'Elex Media Komputindo', 'buku1.jpg', 'Pengetahuan pasar modal menjadi topik yang harus dikuasai mahasiswa Indonesia dan para pelaku bisnis. Paling tidak ada dua balasan yang bisa mendasar statement tersebut. Pertama, kalangan kampus akhir-akhir ini sedang menggalakkan entrepreneurship. Namun, sering kali kewirausahaan ini didapakan pada permasalahan permodalan. Hal yang selalu dijumpai, lulusan perguruan tinggi yang sudah mengusai ilmu entrepreneurship sekalipun tidak berhasil melahirkan usaha sendiri, akibat tidak tersedianya modal. Padahal, pasar modal bisa menyediakan modal yang diperlukan tersebut. Alasan kedua, tiga dekade terakhir dunia sering dilanda krisis ekonomi yang bersumber dari pasar modal. Pasar modal yang niatnya dibentuk untuk menyediakan modal bagi para pengusaha dan menyediakan alternatif penghasilan bagi para pemilik modal, telah menjadi ajang spekulasi, yang selalu berakhir dengan krisis ekonomi.', 2),
-(2, 'Andreas Zu', 2016, 'Kitab jomblo', 'Yogyakarta', 'Pohon Cahaya', 'buku2.jpg', 'Kesan pertama setelah buku ini ada di tangan dan saya keluarkan dari plastiknya, covernya ganti. Tampak lebih muda, fresh dan simple. Ada gambar ayam di cover yang sepertinya mengambil ide dari cerita yang ada di dalamnya. Begitu buku saya buka, sial lem nya lepas. Covernya hampir copot, jadi terpaksa bacanya pelan-pelan kayak lagi ngelus tangan mantan.', 2),
+(2, 'Andreas Zu', 2016, 'Kitab jomblo', 'Yogyakarta', 'Pohon Cahaya', 'buku2.jpg', 'Kesan pertama setelah buku ini ada di tangan dan saya keluarkan dari plastiknya, covernya ganti. Tampak lebih muda, fresh dan simple. Ada gambar ayam di cover yang sepertinya mengambil ide dari cerita yang ada di dalamnya. Begitu buku saya buka, sial lem nya lepas. Covernya hampir copot, jadi terpaksa bacanya pelan-pelan kayak lagi ngelus tangan mantan.', 1),
 (3, 'Sjarif Amin', 2017, 'Bangkarak jurnalistik', 'Bandung', 'Dunia Pustaka Jaya', 'buku3.jpg', 'Membaca tulisan Syarif Amin dalam buku ini, membangunkan kembali rasa penasaran mengenai \"Bayangan Dirinya\" Orang Sunda jaman sekarang. Mohamad Koerdi atau Sjarif Amin adalah salah satu tokoh pers nasional yang lahir di Ciamis pada 10 September 1907. Ia mulai aktif di dunia jurnalistik pada tahun 1929 sebagai wartawan surat kabar berbahasa Sunda, Sipatahoenan. Tahun 1930-an awal, selain aktif di Sipatahoenan, ia juga menjadi penanggung jawab redaktur mingguan Bidjaksana.', 2),
 (8, 'Tere Liye', 2014, 'Bumi (Earth)', 'Jakarta', 'Gramedia Pustaka Utama', 'buku4.jpg', '', 2);
 
@@ -71,7 +71,10 @@ INSERT INTO `detail_peminjam` (`id_detail_peminjaman`, `id_buku`, `id_peminjam`,
 (2, 2, 1, 1),
 (3, 3, 3, 1),
 (6, 8, 38, 0),
-(7, 8, 40, 1);
+(7, 8, 40, 1),
+(8, 2, 41, 1),
+(9, 3, 42, 1),
+(10, 3, 43, 1);
 
 -- --------------------------------------------------------
 
@@ -94,7 +97,13 @@ INSERT INTO `detail_pengembalian` (`id_detail_pengembalian`, `id_pengembalian`, 
 (1, 1, 1, 0),
 (2, 2, 1, 0),
 (3, 3, 1, 0),
-(4, 4, 1, 0);
+(4, 4, 1, 0),
+(6, 6, 1, 0),
+(7, 7, 1, 0),
+(8, 8, 1, 0),
+(9, 9, 1, 0),
+(10, 10, 1, 0),
+(11, 11, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -128,20 +137,24 @@ CREATE TABLE `peminjaman` (
   `id_petugas` int(11) NOT NULL,
   `id_buku` int(11) NOT NULL,
   `tanggal_peminjaman` date NOT NULL,
-  `tanggal_pengembalian` date NOT NULL
+  `tanggal_pengembalian` date NOT NULL,
+  `status` enum('dipinjam','dikembalikan') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `peminjaman`
 --
 
-INSERT INTO `peminjaman` (`id_peminjaman`, `id_siswa`, `id_petugas`, `id_buku`, `tanggal_peminjaman`, `tanggal_pengembalian`) VALUES
-(1, 1, 3, 2, '2022-03-01', '2022-03-15'),
-(2, 3, 2, 1, '2022-05-01', '2022-05-15'),
-(3, 2, 1, 3, '2022-07-01', '2022-09-15'),
-(38, 1, 3, 8, '2022-10-03', '2022-10-10'),
-(39, 1, 3, 8, '2022-10-03', '2022-10-10'),
-(40, 1, 3, 8, '2022-10-03', '2022-10-10');
+INSERT INTO `peminjaman` (`id_peminjaman`, `id_siswa`, `id_petugas`, `id_buku`, `tanggal_peminjaman`, `tanggal_pengembalian`, `status`) VALUES
+(1, 1, 3, 2, '2022-03-01', '2022-03-15', 'dipinjam'),
+(2, 3, 2, 1, '2022-05-01', '2022-05-15', 'dipinjam'),
+(3, 2, 1, 3, '2022-07-01', '2022-09-15', 'dipinjam'),
+(38, 1, 3, 8, '2022-10-03', '2022-10-10', 'dipinjam'),
+(39, 1, 3, 8, '2022-10-03', '2022-10-10', 'dipinjam'),
+(40, 1, 3, 8, '2022-10-03', '2022-10-10', 'dikembalikan'),
+(41, 3, 3, 2, '2022-09-09', '2022-09-16', 'dikembalikan'),
+(42, 1, 3, 3, '2022-10-03', '2022-10-10', 'dikembalikan'),
+(43, 1, 3, 3, '2022-10-03', '2022-10-10', 'dikembalikan');
 
 -- --------------------------------------------------------
 
@@ -164,7 +177,13 @@ INSERT INTO `pengembalian` (`id_pengembalian`, `id_peminjaman`, `tanggal_pengemb
 (1, 1, '2022-03-13', 0),
 (2, 3, '2022-05-12', 0),
 (3, 2, '2022-09-12', 0),
-(4, 1, '2022-03-17', 2000);
+(4, 1, '2022-03-17', 2000),
+(6, 40, '2022-10-10', 0),
+(7, 40, '2022-10-10', 0),
+(8, 40, '2022-10-10', 0),
+(9, 41, '2022-09-10', 6000),
+(10, 42, '2022-10-06', 4000),
+(11, 43, '2022-10-06', 4000);
 
 -- --------------------------------------------------------
 
@@ -197,7 +216,7 @@ INSERT INTO `petugas` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `password`) VAL
 
 CREATE TABLE `siswa` (
   `nis` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
+  `nama_siswa` varchar(255) NOT NULL,
   `jenis_kelamin` enum('L','P') NOT NULL,
   `alamat` varchar(50) NOT NULL,
   `id_kelas` int(2) NOT NULL
@@ -207,10 +226,11 @@ CREATE TABLE `siswa` (
 -- Dumping data untuk tabel `siswa`
 --
 
-INSERT INTO `siswa` (`nis`, `nama`, `jenis_kelamin`, `alamat`, `id_kelas`) VALUES
+INSERT INTO `siswa` (`nis`, `nama_siswa`, `jenis_kelamin`, `alamat`, `id_kelas`) VALUES
 (1, 'Rendy', 'L', 'Malang', 1),
 (2, 'Silvi', 'P', 'Sidoarjo', 2),
-(3, 'Matilda', 'P', 'Tulungagung', 3);
+(3, 'Matilda', 'P', 'Tulungagung', 3),
+(4, 'Dinda', 'P', 'Malang', 2);
 
 --
 -- Indexes for dumped tables
@@ -286,13 +306,13 @@ ALTER TABLE `buku`
 -- AUTO_INCREMENT untuk tabel `detail_peminjam`
 --
 ALTER TABLE `detail_peminjam`
-  MODIFY `id_detail_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_detail_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_pengembalian`
 --
 ALTER TABLE `detail_pengembalian`
-  MODIFY `id_detail_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_detail_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `kelas`
@@ -304,13 +324,13 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengembalian`
 --
 ALTER TABLE `pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `petugas`
@@ -322,7 +342,7 @@ ALTER TABLE `petugas`
 -- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `nis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `nis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

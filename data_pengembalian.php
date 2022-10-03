@@ -88,9 +88,13 @@ if (isset($_POST['submit'])) {
   $kembali = $_POST['kembali'];
   $ada = $_POST['ada'];
   $hilang = $_POST['hilang'];
+  $status = "dikembalikan";
 
-  $q1 = mysqli_query($conn, "SELECT * FROM peminjaman WHERE id_peminjaman='$id_pinjam'");
+  $q1 = mysqli_query($conn, "SELECT * FROM peminjaman JOIN buku ON peminjaman.id_buku=buku.id_buku WHERE id_peminjaman='$id_pinjam'");
   $r = mysqli_fetch_assoc($q1);
+  $id_buku = $r['id_buku'];
+  $stok = $r['stok'];
+  $stok_baru = $stok + $ada;
   $tgl_asli = $r['tanggal_pengembalian'];
   $diff = date_diff(date_create($tgl_asli), date_create($kembali));
   $hari = $diff->format('%a');
@@ -101,8 +105,11 @@ if (isset($_POST['submit'])) {
     $last_id = mysqli_insert_id($conn);
     $q2 = mysqli_query($conn, "INSERT INTO detail_pengembalian (id_pengembalian, ada, hilang) VALUES ('$last_id', '$ada', '$hilang')");
     if ($q2) {
-      echo "<script>alert('Berhasil mengembalikan buku.')</script>";
-      echo "<script>alert window.location.href = 'data_pengembalian.php' </script>";
+      $q3 = mysqli_query($conn, "UPDATE peminjaman SET status='$status' WHERE id_peminjaman='$id_pinjam'");
+      if ($q3) {
+        $q3 = mysqli_query($conn, "UPDATE buku SET stok='$stok_baru' WHERE id_buku='$id_buku'");
+        echo "<script>alert('Berhasil mengembalikan buku.');window.location.href='home.php'</script>";
+      }
     }
   }
 }

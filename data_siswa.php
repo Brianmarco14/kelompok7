@@ -78,7 +78,7 @@ include "config.php";
             
             <tr>
                 <td><?= $data['nis'] ?></td>
-                <td><?= $data['nama'] ?></td>
+                <td><?= $data['nama_siswa'] ?></td>
                 <td><?= $data['jenis_kelamin'] ?></td>
                 <td><?= $data['alamat'] ?></td>
                 <td><?= $data['nama_kelas'] ?></td>

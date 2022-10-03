@@ -43,7 +43,7 @@ include "config.php";
         <div class="container mt-3">
         <h3 class="text-center">DAFTAR BUKU</h3>
         <div class="container mx-auto mt-4">
-            <form class="d-flex" action="cari.php" method="get">
+            <form class="d-flex" action="cari_buku.php" method="get">
                 <input class="form-control me-2" type="text" placeholder="cari buku" name="cari">
                 <input type="submit" value="Cari" class="btn btn-success">
     </form>

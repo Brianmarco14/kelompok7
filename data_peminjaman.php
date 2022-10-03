@@ -65,6 +65,7 @@ include "config.php";
                     <th>Jumlah</th>
                     <th>Tanggal Peminjaman</th>
                     <th>Tanggal Pengembalian</th>
+                    <th>Status</th>
 
                 </tr>
             </thead>
@@ -79,7 +80,7 @@ include "config.php";
             
             <tr>
                 <td><?= $data['id_peminjaman'] ?></td>
-                <td><?= $data['id_siswa'] ?></td>
+                <td><?= $data['nama_siswa'] ?></td>
                 <td><?= $data['nama'] ?></td>
                 <td><?= $data['judul'] ?></td>
                 <td>
@@ -89,6 +90,29 @@ include "config.php";
                 <td><?= $data['kuantitas'] ?></td>
                 <td><?= $data['tanggal_peminjaman'] ?></td>
                 <td><?= $data['tanggal_pengembalian'] ?></td>
+                <td><?= $data['status'] ?></td>
+                
+    
+    <!-- $q1 = mysqli_query($conn, "SELECT * FROM peminjaman");
+
+    $date = date('Y-m-d');
+    // echo $date;
+    $tgl = mysqli_fetch_assoc($q1);
+    $tgl_k = strtotime($tgl['tanggal_pengembalian']);
+    $tgl_s = strtotime($date);
+    $status = $tgl['status'];
+      if ($tgl_s > $tgl_k) {
+       echo $tgl['status'];      -->
+      <!-- // } else {
+      //   $tgl['status'];
+      }
+    // elseif ($tgl_s > $tgl_k) {
+    //     echo "Telat";
+    // }else{
+    //     echo "dipinjam";
+    // }     -->
+    
+
             </tr>
             
             <?php

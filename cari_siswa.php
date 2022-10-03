@@ -15,6 +15,8 @@ include 'config.php';
 </head>
 <body>
 
+<div class="container mx-auto mt-4">
+<table class="table table-striped table-hover">
 <?php
 if(isset($_GET['cari'])){
 	$cari = $_GET['cari'];
@@ -22,8 +24,6 @@ if(isset($_GET['cari'])){
 }
 ?>
 <br>
-
-<table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>NIS</th>
@@ -36,7 +36,7 @@ if(isset($_GET['cari'])){
     <?php
     if(isset($_GET['cari'])){
         $cari = $_GET['cari'];
-        $data = mysqli_query($conn, "SELECT * FROM siswa JOIN kelas ON siswa.id_kelas = kelas.id_kelas where nama like '%".$cari."%'"); 
+        $data = mysqli_query($conn, "SELECT * FROM siswa JOIN kelas ON siswa.id_kelas = kelas.id_kelas where nama_siswa like '%".$cari."%'"); 
     }
     else{
         $data = mysqli_query($conn, "SELECT * from siswa JOIN kelas ON siswa.id_kelas = kelas.id_kelas"); 
@@ -46,7 +46,7 @@ while($d = mysqli_fetch_array($data)){
 ?>
 <tr>
     <td><?php echo $d['nis']; ?></td>
-    <td><?php echo $d['nama']; ?></td>
+    <td><?php echo $d['nama_siswa']; ?></td>
     <td><?php echo $d['jenis_kelamin']; ?></td>
     <td><?php echo $d['alamat']; ?></td>
     <td><?php echo $d['nama_kelas']; ?></td>

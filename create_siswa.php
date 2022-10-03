@@ -78,7 +78,7 @@ if (isset($_POST['submit'])) {
 	$alamat = $_POST['alamat'];
 	$id_kelas = $_POST['id_kelas'];
 
-	$query_insert = mysqli_query($conn, "INSERT INTO siswa(nis, nama, jenis_kelamin, alamat, id_kelas)
+	$query_insert = mysqli_query($conn, "INSERT INTO siswa(nis, nama_siswa, jenis_kelamin, alamat, id_kelas)
 	VALUES ('$nis','$nama', '$jenis_kelamin', '$alamat', '$id_kelas')");
 
 	echo "<script>alert('Data telah disimpan');

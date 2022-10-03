@@ -50,6 +50,7 @@ $id_buku = $_GET['id_buku'];
 					<label for="" class="form-label">Tanggal Peminjaman</label>
 					<input type="date" class="form-control" value="" name="pinjam"></input>				
 				</div>
+
 			<div class="text-end">
 			<a href="home.php" type="button" class="btn btn-danger"> Kembali </a>
 			<button type="submit" name="submit" type="button" class="btn btn-success"> Submit </button>
@@ -75,6 +76,7 @@ if (isset($_POST['submit'])) {
 	$pinjam = $_POST['pinjam'];
 	$kembali = date('Y-m-d', strtotime('+7 days', strtotime($pinjam)));
 	$total = $_POST ['total'];
+	$status = "dipinjam"; 
 
 	$q1 = mysqli_query($conn, "SELECT * FROM buku WHERE id_buku='$id_buku'");
 	$r = mysqli_fetch_assoc($q1);
@@ -85,7 +87,7 @@ if (isset($_POST['submit'])) {
 		echo "<script>alert('stock tidak cukup');</script>";
 
 	} else {
-		$tambahpinjam = mysqli_query($conn, "INSERT INTO peminjaman (id_siswa, id_petugas, id_buku, tanggal_peminjaman, tanggal_pengembalian) VALUES ('$nis', '$nip', '$id_buku', '$pinjam', '$kembali')");
+		$tambahpinjam = mysqli_query($conn, "INSERT INTO peminjaman (id_siswa, id_petugas, id_buku, tanggal_peminjaman, tanggal_pengembalian, status) VALUES ('$nis', '$nip', '$id_buku', '$pinjam', '$kembali', '$status')");
 		if ($tambahpinjam) {
 			$que = mysqli_query($conn, "UPDATE buku SET stok='$sisa' WHERE id_buku='$id_buku'");
 			echo "<script>alert('berhasil meminjam buku');</script>";
