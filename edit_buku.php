@@ -44,7 +44,7 @@ while($data = mysqli_fetch_array($ambil)){
             <input type="text" name="kota" class="form-control" id="kota" value="<?= $data['kota'] ?>">
          </div>
          <div class="mb-3">
-            <label for="nama" class="form-label">penerbit</label>
+            <label for="nama" class="form-label">Penerbit</label>
             <input type="text" name="penerbit" class="form-control" id="penerbit" value="<?= $data['penerbit'] ?>">
          </div>
          <div class="mb-3">

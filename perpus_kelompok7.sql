@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2022 at 05:06 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Waktu pembuatan: 03 Okt 2022 pada 14.02
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `buku`
+-- Struktur dari tabel `buku`
 --
 
 CREATE TABLE `buku` (
@@ -40,19 +40,19 @@ CREATE TABLE `buku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `buku`
+-- Dumping data untuk tabel `buku`
 --
 
 INSERT INTO `buku` (`id_buku`, `penulis`, `tahun`, `judul`, `kota`, `penerbit`, `cover`, `sinopsi`, `stok`) VALUES
 (1, 'Sarwidji Widoatmodjo', 2015, 'Pengetahuan pasar modal : untuk konteks Indonesia', 'Jakarta', 'Elex Media Komputindo', 'buku1.jpg', 'Pengetahuan pasar modal menjadi topik yang harus dikuasai mahasiswa Indonesia dan para pelaku bisnis. Paling tidak ada dua balasan yang bisa mendasar statement tersebut. Pertama, kalangan kampus akhir-akhir ini sedang menggalakkan entrepreneurship. Namun, sering kali kewirausahaan ini didapakan pada permasalahan permodalan. Hal yang selalu dijumpai, lulusan perguruan tinggi yang sudah mengusai ilmu entrepreneurship sekalipun tidak berhasil melahirkan usaha sendiri, akibat tidak tersedianya modal. Padahal, pasar modal bisa menyediakan modal yang diperlukan tersebut. Alasan kedua, tiga dekade terakhir dunia sering dilanda krisis ekonomi yang bersumber dari pasar modal. Pasar modal yang niatnya dibentuk untuk menyediakan modal bagi para pengusaha dan menyediakan alternatif penghasilan bagi para pemilik modal, telah menjadi ajang spekulasi, yang selalu berakhir dengan krisis ekonomi.', 2),
 (2, 'Andreas Zu', 2016, 'Kitab jomblo', 'Yogyakarta', 'Pohon Cahaya', 'buku2.jpg', 'Kesan pertama setelah buku ini ada di tangan dan saya keluarkan dari plastiknya, covernya ganti. Tampak lebih muda, fresh dan simple. Ada gambar ayam di cover yang sepertinya mengambil ide dari cerita yang ada di dalamnya. Begitu buku saya buka, sial lem nya lepas. Covernya hampir copot, jadi terpaksa bacanya pelan-pelan kayak lagi ngelus tangan mantan.', 2),
 (3, 'Sjarif Amin', 2017, 'Bangkarak jurnalistik', 'Bandung', 'Dunia Pustaka Jaya', 'buku3.jpg', 'Membaca tulisan Syarif Amin dalam buku ini, membangunkan kembali rasa penasaran mengenai \"Bayangan Dirinya\" Orang Sunda jaman sekarang. Mohamad Koerdi atau Sjarif Amin adalah salah satu tokoh pers nasional yang lahir di Ciamis pada 10 September 1907. Ia mulai aktif di dunia jurnalistik pada tahun 1929 sebagai wartawan surat kabar berbahasa Sunda, Sipatahoenan. Tahun 1930-an awal, selain aktif di Sipatahoenan, ia juga menjadi penanggung jawab redaktur mingguan Bidjaksana.', 2),
-(6, 'qwwqw', 2022, 'qwqwq', 'qwqw', 'qwqwq', '2nd.png', '', 10);
+(8, 'Tere Liye', 2014, 'Bumi (Earth)', 'Jakarta', 'Gramedia Pustaka Utama', 'buku4.jpg', '', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_peminjam`
+-- Struktur dari tabel `detail_peminjam`
 --
 
 CREATE TABLE `detail_peminjam` (
@@ -63,18 +63,20 @@ CREATE TABLE `detail_peminjam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `detail_peminjam`
+-- Dumping data untuk tabel `detail_peminjam`
 --
 
 INSERT INTO `detail_peminjam` (`id_detail_peminjaman`, `id_buku`, `id_peminjam`, `kuantitas`) VALUES
 (1, 1, 2, 1),
 (2, 2, 1, 1),
-(3, 3, 3, 1);
+(3, 3, 3, 1),
+(6, 8, 38, 0),
+(7, 8, 40, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_pengembalian`
+-- Struktur dari tabel `detail_pengembalian`
 --
 
 CREATE TABLE `detail_pengembalian` (
@@ -85,18 +87,19 @@ CREATE TABLE `detail_pengembalian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `detail_pengembalian`
+-- Dumping data untuk tabel `detail_pengembalian`
 --
 
 INSERT INTO `detail_pengembalian` (`id_detail_pengembalian`, `id_pengembalian`, `ada`, `hilang`) VALUES
 (1, 1, 1, 0),
 (2, 2, 1, 0),
-(3, 3, 1, 0);
+(3, 3, 1, 0),
+(4, 4, 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelas`
+-- Struktur dari tabel `kelas`
 --
 
 CREATE TABLE `kelas` (
@@ -105,7 +108,7 @@ CREATE TABLE `kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kelas`
+-- Dumping data untuk tabel `kelas`
 --
 
 INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
@@ -116,7 +119,7 @@ INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `peminjaman`
+-- Struktur dari tabel `peminjaman`
 --
 
 CREATE TABLE `peminjaman` (
@@ -129,24 +132,21 @@ CREATE TABLE `peminjaman` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `peminjaman`
+-- Dumping data untuk tabel `peminjaman`
 --
 
 INSERT INTO `peminjaman` (`id_peminjaman`, `id_siswa`, `id_petugas`, `id_buku`, `tanggal_peminjaman`, `tanggal_pengembalian`) VALUES
 (1, 1, 3, 2, '2022-03-01', '2022-03-15'),
 (2, 3, 2, 1, '2022-05-01', '2022-05-15'),
 (3, 2, 1, 3, '2022-07-01', '2022-09-15'),
-(14, 1, 3, 6, '1111-11-11', '1112-11-11'),
-(19, 2, 1, 6, '6666-06-06', '6667-06-06'),
-(20, 1, 1, 6, '4444-04-04', '4445-04-04'),
-(21, 3, 1, 6, '8888-08-08', '8889-08-08'),
-(31, 1, 3, 3, '5555-05-05', '5555-05-05'),
-(32, 2, 3, 2, '1111-11-11', '1111-11-11');
+(38, 1, 3, 8, '2022-10-03', '2022-10-10'),
+(39, 1, 3, 8, '2022-10-03', '2022-10-10'),
+(40, 1, 3, 8, '2022-10-03', '2022-10-10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengembalian`
+-- Struktur dari tabel `pengembalian`
 --
 
 CREATE TABLE `pengembalian` (
@@ -157,18 +157,19 @@ CREATE TABLE `pengembalian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `pengembalian`
+-- Dumping data untuk tabel `pengembalian`
 --
 
 INSERT INTO `pengembalian` (`id_pengembalian`, `id_peminjaman`, `tanggal_pengembalian`, `denda`) VALUES
 (1, 1, '2022-03-13', 0),
 (2, 3, '2022-05-12', 0),
-(3, 2, '2022-09-12', 0);
+(3, 2, '2022-09-12', 0),
+(4, 1, '2022-03-17', 2000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `petugas`
+-- Struktur dari tabel `petugas`
 --
 
 CREATE TABLE `petugas` (
@@ -180,7 +181,7 @@ CREATE TABLE `petugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `petugas`
+-- Dumping data untuk tabel `petugas`
 --
 
 INSERT INTO `petugas` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `password`) VALUES
@@ -191,7 +192,7 @@ INSERT INTO `petugas` (`nip`, `nama`, `jenis_kelamin`, `alamat`, `password`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `siswa`
+-- Struktur dari tabel `siswa`
 --
 
 CREATE TABLE `siswa` (
@@ -203,7 +204,7 @@ CREATE TABLE `siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `siswa`
+-- Dumping data untuk tabel `siswa`
 --
 
 INSERT INTO `siswa` (`nis`, `nama`, `jenis_kelamin`, `alamat`, `id_kelas`) VALUES
@@ -216,13 +217,13 @@ INSERT INTO `siswa` (`nis`, `nama`, `jenis_kelamin`, `alamat`, `id_kelas`) VALUE
 --
 
 --
--- Indexes for table `buku`
+-- Indeks untuk tabel `buku`
 --
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`id_buku`);
 
 --
--- Indexes for table `detail_peminjam`
+-- Indeks untuk tabel `detail_peminjam`
 --
 ALTER TABLE `detail_peminjam`
   ADD PRIMARY KEY (`id_detail_peminjaman`),
@@ -230,20 +231,20 @@ ALTER TABLE `detail_peminjam`
   ADD KEY `id_peminjam` (`id_peminjam`);
 
 --
--- Indexes for table `detail_pengembalian`
+-- Indeks untuk tabel `detail_pengembalian`
 --
 ALTER TABLE `detail_pengembalian`
   ADD PRIMARY KEY (`id_detail_pengembalian`),
   ADD KEY `id_pengembalian` (`id_pengembalian`);
 
 --
--- Indexes for table `kelas`
+-- Indeks untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
   ADD PRIMARY KEY (`id_kelas`);
 
 --
--- Indexes for table `peminjaman`
+-- Indeks untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD PRIMARY KEY (`id_peminjaman`),
@@ -252,96 +253,96 @@ ALTER TABLE `peminjaman`
   ADD KEY `id_buku` (`id_buku`);
 
 --
--- Indexes for table `pengembalian`
+-- Indeks untuk tabel `pengembalian`
 --
 ALTER TABLE `pengembalian`
   ADD PRIMARY KEY (`id_pengembalian`),
   ADD KEY `id_peminjaman` (`id_peminjaman`);
 
 --
--- Indexes for table `petugas`
+-- Indeks untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
   ADD PRIMARY KEY (`nip`);
 
 --
--- Indexes for table `siswa`
+-- Indeks untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`nis`),
   ADD KEY `id_kelas` (`id_kelas`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `buku`
+-- AUTO_INCREMENT untuk tabel `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `detail_peminjam`
+-- AUTO_INCREMENT untuk tabel `detail_peminjam`
 --
 ALTER TABLE `detail_peminjam`
-  MODIFY `id_detail_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_detail_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `detail_pengembalian`
+-- AUTO_INCREMENT untuk tabel `detail_pengembalian`
 --
 ALTER TABLE `detail_pengembalian`
-  MODIFY `id_detail_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_detail_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `kelas`
+-- AUTO_INCREMENT untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
   MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `peminjaman`
+-- AUTO_INCREMENT untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT for table `pengembalian`
+-- AUTO_INCREMENT untuk tabel `pengembalian`
 --
 ALTER TABLE `pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `petugas`
+-- AUTO_INCREMENT untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
   MODIFY `nip` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `siswa`
+-- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   MODIFY `nis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `detail_peminjam`
+-- Ketidakleluasaan untuk tabel `detail_peminjam`
 --
 ALTER TABLE `detail_peminjam`
   ADD CONSTRAINT `detail_peminjam_ibfk_1` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`),
   ADD CONSTRAINT `detail_peminjam_ibfk_2` FOREIGN KEY (`id_peminjam`) REFERENCES `peminjaman` (`id_peminjaman`);
 
 --
--- Constraints for table `detail_pengembalian`
+-- Ketidakleluasaan untuk tabel `detail_pengembalian`
 --
 ALTER TABLE `detail_pengembalian`
   ADD CONSTRAINT `detail_pengembalian_ibfk_1` FOREIGN KEY (`id_pengembalian`) REFERENCES `pengembalian` (`id_pengembalian`);
 
 --
--- Constraints for table `peminjaman`
+-- Ketidakleluasaan untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
   ADD CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`nip`),
@@ -349,13 +350,13 @@ ALTER TABLE `peminjaman`
   ADD CONSTRAINT `peminjaman_ibfk_3` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`);
 
 --
--- Constraints for table `pengembalian`
+-- Ketidakleluasaan untuk tabel `pengembalian`
 --
 ALTER TABLE `pengembalian`
   ADD CONSTRAINT `pengembalian_ibfk_1` FOREIGN KEY (`id_peminjaman`) REFERENCES `peminjaman` (`id_peminjaman`);
 
 --
--- Constraints for table `siswa`
+-- Ketidakleluasaan untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`);

@@ -63,7 +63,7 @@ if(!$_SESSION['nama']){
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Cover</th>
                     <th>Penulis</th>
                     <th>Tahun Terbit</th>
@@ -79,14 +79,14 @@ if(!$_SESSION['nama']){
             <tbody>
 
             <?php
-
+            $no=0;
             $ambil = mysqli_query($conn, "SELECT * FROM buku");
             while ($data = mysqli_fetch_array($ambil)) {
-                
+            $no++;
             ?>
             
             <tr>
-                <td><?= $data['id_buku'] ?></td>
+                <td><?= $no ?></td>
                 <td>
                 <img src= "assets/cover/<?= $data['cover'] ?>" class= "img-thumbnail" alt=""
                     style="width: 100px;">

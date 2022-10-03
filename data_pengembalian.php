@@ -1,4 +1,4 @@
-<!-- dinda membuat data siswa.php -->
+<!-- dinda membuat data pengembalian.php -->
 <?php
 session_start();
 include "config.php";
@@ -47,50 +47,64 @@ include "config.php";
           </div>
         </div>
       </nav>
-        <div class="container mt-3">
-        <h3 class="text-center">DATA PENGEMBALIAN</h3>
-        <div class="container mx-auto mt-4">
-            <form class="d-flex" action="cari_siswa.php" method="get">
-                <input class="form-control me-2" type="text" placeholder="cari data" name="cari">
-                <input type="submit" value="Cari" class="btn btn-success">
-    </form>
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>ID Peminjaman</th>
-                    <th>ID Siswa</th>
-                    <th>ID Petugas</th>
-                    <th>Tanggal Peminjaman</th>
-                    <th>Tanggal Pengembalian</th>
+      <div class="container card p-3 mt-2">
+		<h1 class="text-center">Pengembalian</h1>
 
-                </tr>
-            </thead>
-            <tbody>
-
+		<form action="" method="post" enctype="multipart/form-data">
+					<div class="mb-3">
+            <label class="form-label">ID Peminjaman</label>
+            <select class="form-select" name="id_pinjam">
             <?php
-
-            $ambil = mysqli_query($conn, "SELECT * FROM peminjaman");
-            while ($data = mysqli_fetch_array($ambil)) {
-                
+            $sql = mysqli_query($conn, "SELECT * FROM peminjaman ");
+            while ($data = mysqli_fetch_array($sql)){
             ?>
-            
-            <tr>
-                <td><?= $data['id_peminjaman'] ?></td>
-                <td><?= $data['id_siswa'] ?></td>
-                <td><?= $data['id_petugas'] ?></td>
-                <td><?= $data['tanggal_peminjaman'] ?></td>
-                <td><?= $data['tanggal_pengembalian'] ?></td>
-            </tr>
-            
+            <option value="<?= $data['id_peminjaman']?>"><?= $data['id_peminjaman']?></option>;
+            <?php if ($data['id_peminjaman'] == $data['id_peminjaman']){
+                echo "selected"; } 
+                ?>
             <?php
-            }
-            ?>
-          
-            </tbody>
-        </table>
-    </div>
-        </div>
-    </div>
-        
+            } ?>
+            </select>
+				</div>
+				<div class="mb-3">
+					<label for="" class="form-label">Tanggal Pengembalian</label>
+					<input type="date" class="form-control" name="kembali" value="<?php echo $data['kembali'] ?>"></input>				
+				</div>
+        <div class="mb-3">
+					<label for="" class="form-label">Buku Ada</label>
+					<input type="number" class="form-control" name="ada" value="<?php echo $data['ada'] ?>"></input>				
+				</div>
+        <div class="mb-3">
+					<label for="" class="form-label">Buku Hilang</label>
+					<input type="number" class="form-control" name="hilang" value="<?php echo $data['hilang'] ?>"></input>				
+				</div>	
+        <button type="submit" name="submit" class="btn btn-success">Submit</button>
 </body>
 </html>
+
+<?php
+if (isset($_POST['submit'])) {
+  $id_pinjam = $_POST['id_pinjam'];
+  $kembali = $_POST['kembali'];
+  $ada = $_POST['ada'];
+  $hilang = $_POST['hilang'];
+
+  $q1 = mysqli_query($conn, "SELECT * FROM peminjaman WHERE id_peminjaman='$id_pinjam'");
+  $r = mysqli_fetch_assoc($q1);
+  $tgl_asli = $r['tanggal_pengembalian'];
+  $diff = date_diff(date_create($tgl_asli), date_create($kembali));
+  $hari = $diff->format('%a');
+  $denda = $hari * 1000;
+
+  $tambahkembali = mysqli_query($conn, "INSERT INTO pengembalian (id_peminjaman, tanggal_pengembalian, denda) VALUES ('$id_pinjam', '$kembali', '$denda')");
+  if ($tambahkembali) {
+    $last_id = mysqli_insert_id($conn);
+    $q2 = mysqli_query($conn, "INSERT INTO detail_pengembalian (id_pengembalian, ada, hilang) VALUES ('$last_id', '$ada', '$hilang')");
+    if ($q2) {
+      echo "<script>alert('Berhasil mengembalikan buku.')</script>";
+      echo "<script>alert window.location.href = 'data_pengembalian.php' </script>";
+    }
+  }
+}
+
+?>

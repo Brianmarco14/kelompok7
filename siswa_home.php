@@ -31,6 +31,9 @@ include "config.php";
               <b><a class="nav-link active aria-current="page" href="#">Home</a></b>
               </li>
               <li class="nav-item">
+                <b><a class="nav-link" href="history.php" >History</a></b>
+              </li>
+              <li class="nav-item">
                 <div class="id=button"></div>
                 <a href="logout.php" class="btn btn-primary text-white" style="font-weight:600; width: 100px;">Log Out</a>
               </li>
